@@ -6,9 +6,8 @@ const channelStore = persistentDataAccess('channels');
 
 const channelManager = {
   createChannel: async (channelName) => {
-    const id = objectId().toString();
     const channel = {
-      id: id,
+      id: objectId().toString(),
       name: channelName,
     };
     await channelStore.create(channel);
@@ -33,7 +32,8 @@ const channelManager = {
     return channel;
   },
   getAllChannels: async () => {
-    return await channelStore.all();
+    const allChannels = await channelStore.all();
+    return allChannels;
   },
 };
 

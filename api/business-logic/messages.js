@@ -6,22 +6,42 @@ const messageStore = persistentDataAccess('messages');
 
 const messageManager = {
   createMessage: async (user, messageContent, channelId) => {
-    // TODO: implement
+    const message = {
+      id: objectId().toString(),
+      text: messageContent,
+      user,
+      channelId,
+      date: new Date(),
+    };
+    await messageStore.create(message);
+    return message;
   },
   updateMessage: async (message) => {
-    // TODO: implement
+    const update = await messageStore.update(message.id, message);
+    return update;
   },
   removeMessage: async (messageId) => {
-    // TODO: implement
+    await messageStore.remove(messageId);
+    return true;
   },
   getMessage: async (messageId) => {
-    // TODO: implement
+    const message = await messageStore.read(messageId);
+    return message;
   },
   getAllMessages: async () => {
-    // TODO: implement
+    const allMessages = await messageStore.all();
+    return allMessages;
   },
   getMessagesForChannel: async (channelId) => {
-    // TODO: implement
+    const result = [];
+    const allMessages = await messageStore.all();
+    for (let i = 0; i < allMessages.length; i++) {
+      const message = allMessages[i];
+      if (message.channelId === channelId) {
+        return result.push(message);
+      }
+    }
+    return result;
   },
 };
 
