@@ -1,5 +1,10 @@
 {
   "users": [],
-  "channels": [],
+  "channels": [
+    {
+      "id": "617180923a1ca82783000001",
+      "name": "huhuhu"
+    }
+  ],
   "messages": []
 }
