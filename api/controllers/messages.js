@@ -38,14 +38,35 @@ const messageController = {
   },
   post: async (req, res) => {
     // creates a new message based on the passed body
-
-    res.send('Not yet implemented');
+    try {
+      const { user } = req.body;
+      const content = req.body.text;
+      const { channelId } = req.params;
+      const message = await messageManager.createMessage(
+        user,
+        content,
+        channelId,
+      );
+      res.status(200).send(JSON.stringify(message));
+    } catch (error) {
+      res.status(500).send(error);
+    }
   },
   delete: async (req, res) => {
     // deleted the message with the specified id
     // passed as /api/messages/:messageId
-
-    res.send('Not yet implemented');
+    try {
+      const { messageId } = req.params;
+      await messageManager.removeMessage(messageId);
+      // eslint-disable-next-line prettier/prettier
+      res.status(200).send(
+        JSON.stringify({
+          message: `Message with id ${messageId} was successfully deleted!`,
+        }),
+      );
+    } catch (error) {
+      res.status(500).send(error);
+    }
   },
 };
 
