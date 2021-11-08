@@ -31,9 +31,18 @@ app.use('/api', routes);
 app.use('/', express.static(path.join(__dirname, '..', config.STATIC_DIR)));
 
 /* eslint-disable */
+//error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).end();
+  res.status(500).send({
+    message: 'Something went wrong!',
+  });
+  const errorLog = {
+    endpoint: `${req.method} ${req.path}`,
+    errorMessage: err.message,
+    stack: err.stack,
+    status: res.statusCode,
+  };
+  console.error(JSON.stringify(errorLog));
 });
 
 app.listen(config.PORT, (err) => {

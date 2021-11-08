@@ -5,7 +5,7 @@ const messageController = {
     // returns all messages currently in the system
     try {
       const messages = await messageManager.getAllMessages();
-      res.send(JSON.stringify([messages]));
+      res.send(JSON.stringify(messages, null, 2));
     } catch (error) {
       res.status(500).send(error);
     }
@@ -14,9 +14,9 @@ const messageController = {
     // returns the messages that belong in the channel with the specified id
     // passed as /api/channels/:channelId/messages
     try {
-      const { channelId } = res.params;
+      const { channelId } = req.params;
       const messages = await messageManager.getMessagesForChannel(channelId);
-      res.send(JSON.stringify([messages]));
+      res.json(messages);
     } catch (error) {
       res.status(500).send(error);
     }

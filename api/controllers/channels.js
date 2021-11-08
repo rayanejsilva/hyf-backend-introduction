@@ -11,14 +11,12 @@ const channelController = {
   },
   getChannelById: async (req, res) => {
     try {
-      const channelId = req.params.channelId;
-      const channel = await channelManager.getChannel(channelId);
-      res.status(200).send(JSON.stringify(channel));
+      res.status(200).send(JSON.stringify(req.channel));
     } catch (error) {
       res.status(500).send(error);
     }
   },
-  put: async (req, res) => {
+  put: async (req, res, next) => {
     try {
       const channelId = req.params.channelId;
       const newData = req.body;
@@ -28,7 +26,7 @@ const channelController = {
       await channelManager.updateChannel(newData);
       res.status(200).send(JSON.stringify(newData));
     } catch (error) {
-      res.status(500).send(error);
+      next(error);
     }
   },
   post: async (req, res) => {

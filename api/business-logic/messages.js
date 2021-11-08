@@ -33,15 +33,15 @@ const messageManager = {
     return allMessages;
   },
   getMessagesForChannel: async (channelId) => {
-    const result = [];
+    const filteredMessages = [];
     const allMessages = await messageStore.all();
     for (let i = 0; i < allMessages.length; i++) {
       const message = allMessages[i];
       if (message.channelId === channelId) {
-        return result.push(message);
+        filteredMessages.push(message);
       }
     }
-    return result;
+    return filteredMessages;
   },
 };
 
