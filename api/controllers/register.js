@@ -1,6 +1,6 @@
-const userManager = require('../business-logic/auth');
+const userManager = require('../business-logic/register');
 
-const authController = {
+const registerController = {
   get: async (req, res) => {
     try {
       const users = await userManager.getAllUsers();
@@ -11,21 +11,14 @@ const authController = {
   },
   post: async (req, res) => {
     try {
-      const { body } = req;
-      const { username, email, password } = body;
-      console.log(body);
+      const { username, email, password } = req.body;
 
       if (!username || !email || !password) {
         res
           .status(400)
           .send('Please, enter a username, email and password to sign up!');
       }
-      const hashedPassword = userManager.hashPassword(password);
-      const user = await userManager.createUser(
-        username,
-        email,
-        hashedPassword,
-      );
+      const user = await userManager.createUser(username, email, password);
       res
         .status(200)
         .json(
@@ -37,4 +30,4 @@ const authController = {
   },
 };
 
-module.exports = authController;
+module.exports = registerController;

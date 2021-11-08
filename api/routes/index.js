@@ -1,7 +1,7 @@
 const express = require('express');
 const channelRoutes = require('./channels');
 const messageRoutes = require('./messages');
-const authRoutes = require('./auth');
+const registerRoutes = require('./register');
 const channelManager = require('../business-logic/channels');
 const messageManager = require('../business-logic/messages');
 
@@ -31,6 +31,6 @@ router.use('/messages/:messageId', async (req, res, next) => {
 });
 router.use('/channels', channelRoutes);
 router.use('/', messageRoutes);
-router.use('/register', authRoutes);
+router.use('/register', registerRoutes);
 // export the routes
 module.exports = router;

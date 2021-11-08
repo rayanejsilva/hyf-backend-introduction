@@ -33,6 +33,11 @@
       "username": "lupi",
       "email": "lupi@email.com",
       "password": "f95664e278cdf0671b90e28d14bd29d4893b63ad9b0bde87a3aba7ce712267da"
+    },
+    {
+      "username": "tess",
+      "email": "tess@email.com",
+      "password": "9ad0d1fe54a6f0ed0d057643e9b88cd37559a28dd8f17c906e36bcb54712fb1a"
     }
   ],
   "channels": [
