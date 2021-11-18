@@ -12,12 +12,6 @@ const registerController = {
   post: async (req, res) => {
     try {
       const { username, email, password } = req.body;
-
-      if (!username || !email || !password) {
-        res
-          .status(400)
-          .send('Please, enter a username, email and password to sign up!');
-      }
       const user = await userManager.createUser(username, email, password);
       res
         .status(200)
