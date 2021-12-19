@@ -4,9 +4,16 @@ async function performFetch(path) {
   const URL = `${window.location.origin}/api/${path}`;
 
   const encodedURL = encodeURI(URL);
-  const response = await fetch(encodedURL);
+  const response = await fetch(encodedURL, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: state.token === undefined ? '' : `Bearer ${state.token}`,
+      Username: state.username === undefined ? '' : state.username,
+    },
+  });
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}\n-> ${URL}`);
+    console.error(`HTTP error! status: ${response.status}\n-> ${URL}`);
   }
   const data = await response.json();
 
